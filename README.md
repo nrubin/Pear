@@ -26,7 +26,7 @@ sudo apt-get install postgresql python-dev
 3. Add a password for the new user:
 ```\password <username>```
 4. Exit the postgres shell:
-```\q```
+```\q ```
 5. Add the pear_dev database under your new username:
 ```sudo -u $USER createdb pear_dev```
 
