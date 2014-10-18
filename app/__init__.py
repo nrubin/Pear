@@ -2,28 +2,18 @@
 # sets up all of the extensions
 
 import os
+import config
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.migrate import Migrate, MigrateCommand
 from flask.ext.script import Manager
 
+# Create and configure app object
 app = Flask(__name__)
+app.config.from_object(config.get_config())
 
-#TODO setup the database connection
-#TODO add the prod environment variable on the production machine
-if os.environ.get('PROD'):
-	app.config['TEST'] = False
-	# setup prod database variables
-else:
-	app.config['TEST'] = True
-	#TODO add a database and actually populate this environment variable
-	app.config['SQLALCHEMY_DAly TABASE_URI'] = os.environ.get('DATABASE_URI')
-	# setup local database variabes
-
+# Setup Flask extensions
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 manager = Manager(app)
 manager.add_command('db',MigrateCommand)
-
-import router
-manager.run()
