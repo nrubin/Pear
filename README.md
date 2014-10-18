@@ -10,19 +10,25 @@ Setup
 This package has the following non-pip dependencies:
 + postgresql
 + python-dev
+```
+sudo apt-get install postgresql python-dev
+```
 
 ###Environment Variables
-+ SQLALCHEMY_DATABASE_URI - should contain the database URI
++ SQLALCHEMY\_DATABASE\_URI - should contain the database URI
 + PEAR_ENV - should contain 'PROD', 'TEST', or 'DEV' (default is 'DEV')
 
 ###Local Database Setup
-1. Install PostgreSQL
-2. Install python-dev in order to pip install psycopg2
-3. Add yourself as a superuser to postgres: sudo -u postgres createuser --superuser $USER
-4.Login to the default database with superuser permissions: sudo -u postgres psql
-5. Add a password for the new user: postgres=# \password <username>
-6. Exit the postgres shell: \q
-7. Add the pear_dev database under your new username: sudo -u $USER createdb pear_dev
+1. Add yourself as a superuser to postgres:
+```sudo -u postgres createuser --superuser $USER```
+2. Login to the default database with superuser permissions:
+```sudo -u postgres psql```
+3. Add a password for the new user:
+```\password <username>```
+4. Exit the postgres shell:
+```\q```
+5. Add the pear_dev database under your new username:
+```sudo -u $USER createdb pear_dev```
 
 You should now be able to access the postgres database with the command: psql pear_dev
 
