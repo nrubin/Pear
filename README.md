@@ -16,7 +16,7 @@ sudo apt-get install postgresql python-dev
 
 ###Environment Variables
 + SQLALCHEMY\_DATABASE\_URI - should contain the database URI
-+ PEAR_ENV - should contain 'PROD', 'TEST', or 'DEV' (default is 'DEV')
++ PEAR_ENV - should contain 'PROD', 'TEST', or 'DEV' (defaults to 'DEV' if unset)
 
 ###Local Database Setup
 1. Add yourself as a superuser to postgres:
