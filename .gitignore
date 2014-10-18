@@ -2,3 +2,7 @@
 *.pyo
 
 venv/
+bin/
+include/
+lib/
+local/
