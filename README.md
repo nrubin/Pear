@@ -30,7 +30,7 @@ sudo apt-get install postgresql python-dev
 5. Add the pear_dev database under your new username:
 ```sudo -u $USER createdb pear_dev``` 
 6. Add make sure the following command is executed each time you open a new shell or run this project (.bashrc)
-```export DATABASE_URI= postgresql://<username>:<password>@localhost/pear_dev```
+```export DATABASE_URI="postgresql://<username>:<password>@localhost/pear_dev"```
 
 ###Database Migrations
 The first time you create the database run then following command from the root directory
@@ -40,6 +40,10 @@ To migrate and upgrade the database run the following commands
 python run.py db migrate
 python run.py db upgrade
 ```
+
+And time you want to add a migration you can use the command
+```python run.py db revision```
+and edit the resulting file in \migrations\versions manually
 
 ###Running the app
 Execute the following in the terminal from the root directory
