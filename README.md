@@ -38,7 +38,7 @@ The first time you create the database run then following command from the root 
 To migrate and upgrade the database run the following commands
 ```
 python run.py db migrate
-python run.py db upgrate
+python run.py db upgrade
 ```
 
 ###Running the app
