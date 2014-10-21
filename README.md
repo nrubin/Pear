@@ -10,12 +10,14 @@ Setup
 This package has the following non-pip dependencies:
 + postgresql
 + python-dev
+
+Install them with apt:
 ```
 sudo apt-get install postgresql python-dev
 ```
 
 ###Environment Variables
-+ SQLALCHEMY\_DATABASE\_URI - should contain the database URI
++ DATABASE_URL - should contain the database URI
 + PEAR_ENV - should contain 'PROD', 'TEST', or 'DEV' (defaults to 'DEV' if unset)
 
 ###Local Database Setup
@@ -32,21 +34,27 @@ sudo apt-get install postgresql python-dev
 6. Add make sure the following command is executed each time you open a new shell or run this project (.bashrc)
 ```export DATABASE_URI="postgresql://<username>:<password>@localhost/pear_dev"```
 
-###Database Migrations
-The first time you create the database run then following command from the root directory
-```python manage.py db init```
-To migrate and upgrade the database run the following commands
-```
-python manage.py db migrate
-python manage.py db upgrade
-```
-
-And time you want to add a migration you can use the command
-```python manage.py db revision```
-and edit the resulting file in \migrations\versions manually
-
-###Running the app
+Running the app
+-------------------
 Execute the following in the terminal from the root directory
 ```
 foreman start
 ```
+
+Database Migrations
+-----------------------
+###Local Database Migrations
+The first time you create the database run then following command from the root directory
+```python manage.py db init```
+
+Generate the migration file in \migrations\versions and populate it automatically with 
+```python manage.py db migrate```
+or setup the migration file manually with
+```python manage.py db revision```
+
+Finally apply the migration to the database with
+```python manage.py db upgrade```
+
+###Remote Database Migration
+Because the migration files will be generated and tested locally, applying the migration to the production database just involves the upgrade step
+```heroku run python manage.py db upgrade```
