@@ -34,7 +34,7 @@ sudo apt-get install postgresql libpq-dev python-dev && wget -qO- https://toolbe
 5. Add the pear_dev database under your new username:
 ```sudo -u $USER createdb pear_dev``` 
 6. Add make sure the following command is executed each time you open a new shell or run this project (.bashrc)
-```export DATABASE_URI="postgresql://<username>:<password>@localhost/pear_dev"```
+```export DATABASE_URL="postgresql://<username>:<password>@localhost/pear_dev"```
 
 Running the app
 -------------------
