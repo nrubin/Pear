@@ -10,11 +10,12 @@ Setup
 This package has the following non-pip dependencies:
 + postgresql
 + python-dev
++ libpq-dev
 + Heroku toolbelt
 
 Install them with apt:
 ```
-sudo apt-get install postgresql python-dev && wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+sudo apt-get install postgresql libpq-dev python-dev && wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 ```
 
 ###Environment Variables
