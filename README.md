@@ -46,10 +46,8 @@ foreman start
 Database Migrations
 -----------------------
 ###Local Database Migrations
-The first time you create the database run then following command from the root directory
-```python manage.py db init```
 
-Generate the migration file in \migrations\versions and populate it automatically with 
+When defining a new migration, generate the migration file in \migrations\versions and populate it automatically with 
 ```python manage.py db migrate```
 or setup the migration file manually with
 ```python manage.py db revision```
