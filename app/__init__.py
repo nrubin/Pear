@@ -14,11 +14,9 @@ app.config.from_object(config.get_config())
 
 # Setup Flask extensions
 db = SQLAlchemy(app)
-migrate = Migrate(app, db)
-# manager = Manager(app)
-# manager.add_command('db',MigrateCommand)
 
+# Only import routes after the app has been configured
 import router
 
-# if __name__ == "__main__":
-# 	app.run()
+if __name__ == "__main__":
+	app.run()

@@ -34,19 +34,19 @@ sudo apt-get install postgresql python-dev
 
 ###Database Migrations
 The first time you create the database run then following command from the root directory
-```python run.py db init```
+```python manage.py db init```
 To migrate and upgrade the database run the following commands
 ```
-python run.py db migrate
-python run.py db upgrade
+python manage.py db migrate
+python manage.py db upgrade
 ```
 
 And time you want to add a migration you can use the command
-```python run.py db revision```
+```python manage.py db revision```
 and edit the resulting file in \migrations\versions manually
 
 ###Running the app
 Execute the following in the terminal from the root directory
 ```
-python run.py runserver
+foreman start
 ```
