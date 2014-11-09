@@ -10,6 +10,8 @@ class Config(object):
 	DEBUG = False
 	TESTING = False
 	SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+	FB_APP_SECRET = os.environ.get('FB_APP_SECRET')
+	FB_APP_ID = os.environ.get('FB_APP_ID')
 
 class ProductionConfig(Config):
 	"""

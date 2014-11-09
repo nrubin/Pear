@@ -1,9 +1,10 @@
 from . import app
 from controllers import *
 from models import *
-from flask import render_template
+from flask import render_template, jsonify, request
+from fb import authenticate
 
-@app.route('/')
-@app.route('/index/')
-def index():
-	return render_template('index.html')
+@app.route('/auth-status/')
+@authenticate
+def user():
+    return jsonify({'authenticated':True})
