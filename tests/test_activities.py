@@ -1,7 +1,7 @@
 #each test suite should import its own copy of unittest and the app
 
 import unittest
-import app
+from app import app, config
 import datetime
 
 import json
@@ -9,7 +9,11 @@ import json
 class ActivityTestCase(unittest.TestCase):
 
 	def setUp(self):
-		self.app = app.app.test_client()
+		"""
+		This is run before every test
+		"""
+		app.config.from_object(config.get_config())
+		self.app = app.test_client()
 
 	def test_add_activity(self):
 		rv = self.app.post('/api/activities/add',data=dict(name='DummyActivity',description='A Dummy Activity'),follow_redirects=True)
@@ -29,7 +33,16 @@ class ActivityTestCase(unittest.TestCase):
 		rv = self.app.post('/api/activities/add',data=bigActivity)
 		assert "Big Activity" in rv.data
 
+	def get_activity(self,name):
+		return self.app.get('/api/activities/get',data=dict(name=name))
+
 	def test_get_activity(self):
-		rv = self.app.get('/api/activities/get',data=dict(name="DummyActivity"))
+		rv = self.get_activity("DummyActivity")
 		assert "DummyActivity" in rv.data
+
+	def test_set_activity_info(self):
+		activity_id = self.get_activity("DummyActivity").data["id"]
+		route = '/api/activities/%d' % id
+		rv = self.app.post(route,dict(name="NewDummyActivity"))
+		assert "NewDummyActivity" in rv.data
 
