@@ -9,9 +9,7 @@ import json
 class ActivityTestCase(unittest.TestCase):
 
 	def setUp(self):
-		"""
-		This is run before every test
-		"""
+		#This function is run before every test
 		app.config.from_object(config.get_config())
 		self.app = app.test_client()
 
