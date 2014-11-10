@@ -1,52 +1,31 @@
-import requests
-from .. import app
-from flask import abort
-from auth import genSecrets
+from auth import fbRequest
+from flask import request
 
-def fb_request(userid='me', edgename=None, fields=None):
-    '''
-    The function that all Facebook requests should go through. Takes in 
-    '''
-
-    # get the auth secrets
-    access_token, appsecret_proof = genSecrets()
-    
-    # build the url
-    fb_url = ['https://graph.facebook.com','v2.2',userid]
-    if edgename:
-        fb_url.append(edgename)
-    fb_url = '/'.join(fb_url)
-    
-    # define the query parameters
-    params = {}
-    params['access_token'] = access_token
-    params['appsecret_proof'] = appsecret_proof
-    if fields:
-        params['fields'] = ','.join(fields)
-
-    r = requests.get(fb_url,params=params)
-    data = r.json()
-    
-    if 'error' in data:
-        pass #TODO: catch any errors from FB
-    
-    return data
-
-def isAuthenticated():
+def get_initial_user_data():
     """
-    Sends a lightweight Facebook request to check if the user has logged in
+    A request fired upon profile create to fetch a user's information
     """
-    return 'id' in fb_request(fields=['id'])
-
-def authenticate(func):
+    # create data dictionary and initial population
+    user_data = {}
+    user_data['short_access_token'] = request.args.get('access_token')
+    
+    # send the user data fbRequest
+    core_fields = ['id','first_name','last_name','gender','birthday','email']
+    opt_fields = ['relationship_status','bio','interested_in']
+    fields = core_fields + opt_fields
+    d = fbRequest(fields=fields)
+    
+    # rename id to fbid and add d to data
+    user_data['fbid'] = d['id']
+    d.pop('id')
+    user_data.update(d)
+    return user_data
+    
+def get_initial_photo_data():
     """
-    A decorator to ensure that the user is authenticated
-    before executing the function.
-
-    This decorator should only be used if a function does not already make a Facebook call
+    A request fired upon profile create to fetch a user's photos
     """
-    def f(*args,**kwargs):
-        if isAuthenticated():
-            return func(*args,**kwargs) 
-        abort(401)
-    return f
+    raise NotImplementedError
+    # send the photos fbRequest
+    photo_data = fbRequest(edgename='photos',fields=['source'],limit=5)
+    return photo_data['data']

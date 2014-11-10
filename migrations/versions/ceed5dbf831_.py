@@ -1,4 +1,5 @@
-"""empty message
+"""
+Adding basic user info
 
 Revision ID: ceed5dbf831
 Revises: None

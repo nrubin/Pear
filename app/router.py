@@ -4,7 +4,13 @@ from models import *
 from flask import render_template, jsonify, request
 from fb import authenticate
 
+# authentication
 @app.route('/auth-status/')
 @authenticate
-def user():
+def auth():
     return jsonify({'authenticated':True})
+
+# # user routes
+# @app.route('/user/create/')
+# def createUser():
+#     UserController.createUser()
