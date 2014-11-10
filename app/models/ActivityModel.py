@@ -13,7 +13,7 @@ class Activity(db.Model):
     difficulty = db.Column(db.String(80))
     pricing = db.Column(psql_json)
     photos = db.Column(psql_array(db.String(200),dimensions=1)) #list of URLs
-    schedule = db.Column(psql_array(db.DateTime(timezone=false)))
+    schedule = db.Column(psql_array(db.DateTime(timezone=False)))
 
     def __init__(self, name,description,duration=None,difficulty=None,pricing=None,photos=None,schedule=None):
         self.name = name
@@ -30,4 +30,4 @@ class Activity(db.Model):
         	self.schedule = schedule
 
     def __repr__(self):
-        return '<User %r>' % self.username
+        return '<Activity %r>' % self.name

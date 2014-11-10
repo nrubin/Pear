@@ -8,3 +8,7 @@ from fb import authenticate
 @authenticate
 def user():
     return jsonify({'authenticated':True})
+
+@app.route('/activities/<id>')
+def activity():
+	return ActivityController.getActivityById(id)

@@ -1,4 +1,2 @@
-import os
-import flaskr
-import unittest
-import tempfile
+#This file should just import all the tests
+from test_activities import *
