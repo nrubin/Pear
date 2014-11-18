@@ -4,11 +4,11 @@ from models import *
 from flask import render_template, jsonify, request
 from fb import authenticate
 
-@app.route('/auth-status/')
+@app.route('/api/auth-status/')
 @authenticate
 def user():
     return jsonify({'authenticated':True})
 
-@app.route('/activities/<id>')
+@app.route('/api/activities/get')
 def activity():
-	return ActivityController.getActivityById(id)
+	return ActivityController.getActivityById(activity_id)
