@@ -9,6 +9,7 @@ class Config(object):
 	SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
 	FB_APP_SECRET = os.environ.get('FB_APP_SECRET')
 	FB_APP_ID = os.environ.get('FB_APP_ID')
+	FB_APP_PERMISSIONS = ['public_profile','email','user_friends']
 
 class ProductionConfig(Config):
 	"""

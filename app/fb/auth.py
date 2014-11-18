@@ -32,7 +32,7 @@ def fbRequest(userid='me', edgename=None, fields=None, limit=None):
     if limit:
         params['limit'] = limit
 
-    r = requests.get(fb_url,params=params)
+    r = requests.get(fb_url, params=params)
     data = r.json()
     
     #check for errors in the response
