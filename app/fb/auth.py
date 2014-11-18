@@ -1,6 +1,7 @@
 import requests
 from flask import abort, request, current_app
 import hashlib, hmac
+from functools import wraps
 from .. import app
     
 def genSecrets():
@@ -32,7 +33,7 @@ def fbRequest(userid='me', edgename=None, fields=None, limit=None):
     if limit:
         params['limit'] = limit
 
-    r = requests.get(fb_url,params=params)
+    r = requests.get(fb_url, params=params)
     data = r.json()
     
     #check for errors in the response
@@ -62,6 +63,7 @@ def authenticate(func):
 
     This decorator should only be used if a function does not already make a Facebook call
     """
+    @wraps(func)
     def f(*args,**kwargs):
         if isAuthenticated():
             return func(*args,**kwargs) 
