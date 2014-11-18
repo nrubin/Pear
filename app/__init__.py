@@ -1,4 +1,4 @@
-# This file contains sets up the app object and
+# This file sets up the app object and
 # sets up all of the extensions
 
 import os

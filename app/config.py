@@ -1,6 +1,3 @@
-#TODO setup the database connection
-#TODO add the prod environment variable on the production machine
-
 import os
 
 class Config(object):
@@ -31,8 +28,12 @@ class DevelopmentConfig(Config):
 	"""
 	DEBUG = True
 
-def get_config():
-	env = os.environ.get('PEAR_ENV')
+def get_config(env=None):
+	"""
+	Returns an object representation of the app config
+	"""
+	# if the env argument is specified it should overwrite the os environment variable
+	env = env or os.environ.get('PEAR_ENV')
 	if env == 'PROD':
 		return ProductionConfig
 	elif env == 'TEST':
