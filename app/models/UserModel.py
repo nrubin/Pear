@@ -15,12 +15,27 @@ class User(db.Model):
     interested_in = db.Column(ARRAY(db.String(20)))
     last_short_token = db.Column(db.String(250))
     last_long_token = db.Column(db.String(250))
+    account_status = db.Column(db.String(20))
+
 
     def __init__(self, data):
         valid_fields = ['fbid','first_name', 'last_name', 'bio', 'photo_ids',
                         'gender', 'short_access_token', 'long_access_token']
         for f in valid_fields:
             self.__dict__[f] = data.get(f,None)
+        self.account_status['activated']
+
+    def block(self):
+        self.account_status = 'blocked'
+
+    def unblock(self):
+        self.account_status = 'activated'
+
+    def deactivate(self):
+        self.account_status = 'deactivated'
+
+    def reactivate(self):
+        self.account_status = 'reactivated'
 
     def __repr__(self):
         return '<User {first_name} {last_name}: {fbid}>'.format(**self.__dict__)

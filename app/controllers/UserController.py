@@ -14,5 +14,15 @@ def createUser():
     """
     user_data = fb.get_initial_user_data()
     raise NotImplementedError
-    # user = UserModel(user_data)
-    return jsonify('success')
+
+def getUserById(user_id):
+    """
+    Returns the user object with this user_id
+    """
+    raise NotImplementedError
+
+def deactivateUser(user_id):
+    """
+    Deactivates the user with this user_id
+    """
+    raise NotImplementedError

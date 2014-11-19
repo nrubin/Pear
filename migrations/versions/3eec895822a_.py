@@ -26,10 +26,11 @@ def upgrade():
     op.add_column('users', sa.Column('last_name', sa.String(80), nullable=False))
     op.add_column('users', sa.Column('bio', sa.Text()))
     op.add_column('users', sa.Column('gender',sa.String(20)))
-    op.add_column('users', sa.Column('relationship_status',sa.String(20)))
-    op.add_column('users', sa.Column('interested_in',ARRAY(sa.String(20))))
-    op.add_column('users', sa.Column('last_short_token',sa.String(250)))
-    op.add_column('users', sa.Column('last_long_token',sa.String(250)))
+    op.add_column('users', sa.Column('relationship_status', sa.String(20)))
+    op.add_column('users', sa.Column('interested_in', ARRAY(sa.String(20))))
+    op.add_column('users', sa.Column('last_short_token', sa.String(250)))
+    op.add_column('users', sa.Column('last_long_token', sa.String(250)))
+    op.add_column('users', sa.Column('account_status', db.String(20)))
 
 def downgrade():
     op.drop_column('users', 'fbid')
@@ -41,5 +42,6 @@ def downgrade():
     op.drop_column('users', 'interested_in')
     op.drop_column('users', 'last_long_token')
     op.drop_column('users', 'last_short_token')
+    op.drop_column('users', 'account_status')
 
     op.add_column('users', sa.Column('username', sa.String(80), unique=True))
