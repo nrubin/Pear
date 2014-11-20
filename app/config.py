@@ -1,6 +1,3 @@
-#TODO setup the database connection
-#TODO add the prod environment variable on the production machine
-
 import os
 
 class Config(object):
@@ -12,6 +9,7 @@ class Config(object):
 	SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
 	FB_APP_SECRET = os.environ.get('FB_APP_SECRET')
 	FB_APP_ID = os.environ.get('FB_APP_ID')
+	FB_APP_PERMISSIONS = ['email','user_friends','user_birthday']
 
 class ProductionConfig(Config):
 	"""

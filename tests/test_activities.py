@@ -3,7 +3,6 @@
 import unittest
 from app import app, config
 import datetime
-
 import json
 
 class ActivityTestCase(unittest.TestCase):
