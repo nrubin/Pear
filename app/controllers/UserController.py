@@ -21,6 +21,12 @@ def getUserById(user_id):
     """
     raise NotImplementedError
 
+def getCurrentUser():
+    """
+    Returns the object representing the current user
+    """
+    raise NotImplementedError
+
 def deactivateUser(user_id):
     """
     Deactivates the user with this user_id

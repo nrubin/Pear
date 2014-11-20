@@ -10,4 +10,4 @@ class UserTestCase(unittest.TestCase):
         self.app = app.test_client()
 
     def test_create_user(self):
-        
+        pass

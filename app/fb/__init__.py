@@ -1,2 +1,3 @@
-from auth import *
-from fb_requests import *
+from .. import app
+import auth
+import fb_requests
