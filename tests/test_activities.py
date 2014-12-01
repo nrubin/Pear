@@ -1,9 +1,10 @@
 #each test suite should import its own copy of unittest and the app
 
 import unittest
-from app import app, config
-import datetime
+from app import app, config, ActivityModel
+from datetime import datetime
 import json
+import pytz
 
 class ActivityTestCase(unittest.TestCase):
 
@@ -44,3 +45,15 @@ class ActivityTestCase(unittest.TestCase):
         rv = self.app.post(route,dict(name="NewDummyActivity"))
         assert "NewDummyActivity" in rv.data
 
+    def test_schedule(self):
+        activity = ActivityModel("Test Activity 1", "The First Test Activity")
+        start_date = datetime.strptime("01/01/2014 00:01", "%m/%d/%Y %H:%M")
+        end_date = datetime.strptime("01/07/2014 00:01", "%m/%d/%Y %H:%M")
+        start_time = datetime.time(12,30,0,pytz.pst)
+        activity.set_schedule(start_date=start_date,
+                            end_date=end_date,
+                            days=[2,4],
+                            duration=60,
+                            repeat="weekly")
+        scheds = activity.get_schedules()
+        assert scheds[0] = datetime.strptime("01/02/2014 00:01", "%m/%d/%Y %H:%M")
