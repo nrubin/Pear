@@ -1,5 +1,6 @@
 #let's play around with dates
 import arrow
+import calendar
 
 class ScheduleItem(object):
 	"""
@@ -72,9 +73,42 @@ def create_activity_schedule(range_start,range_end,start_hour,start_minute,durat
 		schedule.append(sched_item)
 	return schedule
 
+def get_nth_weekday_of_month(n,weekday,month,year):
+	"""
+	Gets the nth occurence of a weekday in a month
+	if n = 0, it returns the last day of the month.
+	if an nth weekday is not found, it returns None.
+	"""
+	weekday_of_first_of_month, days_in_month = calendar.monthrange(year,month)
+	if n == 0:
+		backwards_day = days_in_month
+		day = arrow.get(year,month,backwards_day)
+		while day.weekday() != weekday:
+			day = arrow.get(year,month,backwards_day)
+			backwards_day -= 1
+		return day
+	else:
+		counter = 0 #we will iterate through the month
+		first_day = arrow.get(year,month,1)
+		last_day = arrow.get(year,month,days_in_month)
+		for day_range in arrow.Arrow.span_range('day',first_day,last_day):
+			day = day_range[0]
+			if day.weekday() == weekday:
+				counter += 1
+				if counter == n:
+					return day
+		return None
+
+def get_last_weekday_of_month(weekday,month,year):
+	return get_nth_weekday_of_month(0,weekday,month,year)
 
 if __name__ == '__main__':
+	"""
+	NOTE: MONDAY IS 0.
+	"""
 	#print parse_timestamp_with_tz(1399437480, "US/Eastern")
 	start = arrow.get(2014,1,1)
 	end = arrow.get(2014,1,19)
-	print create_activity_schedule(start,end,15,30,90,[2,4])
+	#print create_activity_schedule(start,end,15,30,90,[2,4])
+	print get_nth_weekday_of_month(1,5,2,2014)
+	print get_last_weekday_of_month(5,2,2014)
